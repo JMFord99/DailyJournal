@@ -24,6 +24,8 @@
                 <category android:name="android.intent.category.APP_CALENDAR" />
             </intent-filter>
         </activity>
+
+
     </application>
 
 </manifest>
