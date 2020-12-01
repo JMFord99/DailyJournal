@@ -17,6 +17,8 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".CompleteDailyPrompt" />
+
         <activity android:name=".CalenderView">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
