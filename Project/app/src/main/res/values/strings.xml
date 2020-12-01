@@ -20,7 +20,8 @@
     <string name="reset_string">Reset</string>
     <string name="submit_string">Submit</string>
     <string name="add_new_todo_item_string">Add New ToDo Item</string>
-
-
+    <string name="channel_name">DailyJournal Notification Channel</string>
+    <string name="channel_description">Notification channel for DailyJournal</string>
+    <string name="alert_string">FYI</string>
 
 </resources>

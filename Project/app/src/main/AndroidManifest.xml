@@ -25,6 +25,7 @@
             </intent-filter>
         </activity>
 
+        <receiver android:process=":remote" android:name=".DailyReminder" />
 
     </application>
 
