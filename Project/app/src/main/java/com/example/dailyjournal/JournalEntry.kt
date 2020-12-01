@@ -4,6 +4,7 @@ import android.content.Intent
 import java.text.ParseException
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
+import android.database.sqlite.SQLiteDatabase
 
 class JournalEntry {
 
@@ -47,6 +48,28 @@ class JournalEntry {
             lastUpdated = LocalDateTime.now()
         }
 
+    }
+    
+    //sqlite 
+    fun createDatabase(db: SQLiteDatabase){
+        db.execSQL("CREATE TABLE entries(" +
+                "entry_date DATE," +
+                "entry_text STRING," +
+                "mood INTEGER);")
+    }
+
+    fun addEntry(db: SQLiteDatabase){
+        db.execSQL("INSERT INTO entries VALUES (" + dateFormat(date) + ", " + prompt + ", " + mood + ");")
+    }
+
+    fun geEntry(db: SQLiteDatabase){
+        db.execSQL("SELECT entry_text, mood FROM entries WHERE entry_date = " + dateFormat(date) + ";")
+    }
+
+    fun dateFormat(date: LocalDateTime): String? {
+        val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+        val formatted = date.format(formatter)
+        return formatted
     }
 
 
