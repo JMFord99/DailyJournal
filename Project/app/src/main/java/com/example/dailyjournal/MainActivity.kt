@@ -1,6 +1,9 @@
 package com.example.dailyjournal
 
+import android.app.Activity
+import android.app.AlarmManager
 import android.app.ListActivity
+import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -27,6 +30,8 @@ class MainActivity : ListActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        setAlarm()
+
 
         mAdapter = JournalEntriesAdapter(applicationContext)
 
@@ -178,6 +183,20 @@ class MainActivity : ListActivity() {
         }
     }
 
+    fun setAlarm() {
+        var mAlarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
+
+        val alarmIntent = Intent(this@MainActivity, DailyReminder::class.java)
+        val pendingIntent = PendingIntent.getBroadcast(this@MainActivity, 0, alarmIntent, 0)
+        val calendar: Calendar = Calendar.getInstance()
+        //mAlarmManager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + 1000L, pendingIntent)
+        calendar.timeInMillis = System.currentTimeMillis()
+        calendar.set(Calendar.HOUR_OF_DAY, 20)
+        calendar.set(Calendar.MINUTE, 0)
+        calendar.set(Calendar.SECOND, 1)
+        mAlarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.timeInMillis,
+                AlarmManager.INTERVAL_DAY, pendingIntent)
+    }
 
     companion object {
 
