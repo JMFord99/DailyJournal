@@ -1,13 +1,9 @@
 package com.example.dailyjournal
 
 import android.content.Intent
-import java.sql.Timestamp
 import java.text.ParseException
-import java.text.SimpleDateFormat
-import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
-import java.util.*
 
 class JournalEntry {
 
@@ -27,6 +23,12 @@ class JournalEntry {
         this.status = status
         this.date = date
         this.lastUpdated = lastUpdated
+    }
+
+    fun toLog(): String {
+        return ("Prompt:" + prompt + ITEM_SEP + "Mood:" + mood
+                + ITEM_SEP + "Status:" + status + ITEM_SEP + "Date:"
+                + FORMAT.format(date) + "\n")
     }
 
     // Create a new ToDoItem from data packaged in an Intent
