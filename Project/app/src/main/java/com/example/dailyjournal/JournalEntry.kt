@@ -38,15 +38,15 @@ class JournalEntry {
 
         prompt = intent.getStringExtra(JournalEntry.PROMPT).toString()
         status = Status.valueOf(intent.getStringExtra(JournalEntry.STATUS).toString())
-        mood = intent.getStringExtra(intent.getStringExtra(JournalEntry.MOOD)) as Integer
+        //mood = intent.getStringExtra(intent.getStringExtra(JournalEntry.MOOD)) as Integer
 
-        try {
+        /*try {
             date = LocalDateTime.parse(intent.getStringExtra(JournalEntry.DATE), FORMAT)
             lastUpdated = LocalDateTime.parse(intent.getStringExtra(JournalEntry.LASTUPDATED), FORMAT)
         } catch (e: ParseException) {
             date = LocalDateTime.now()
             lastUpdated = LocalDateTime.now()
-        }
+        }*/
 
     }
     

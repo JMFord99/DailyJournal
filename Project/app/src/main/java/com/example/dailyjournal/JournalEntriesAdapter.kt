@@ -75,10 +75,10 @@ class JournalEntriesAdapter(private val mContext: Context) : BaseAdapter() {
 
         val pattern = "yyyy-MM-dd 'at' HH:mm:ss"
         val simpleDateFormat = SimpleDateFormat(pattern)
-        val date = simpleDateFormat.format(journalEntry.date)
+        //val date = simpleDateFormat.format(journalEntry.date)
 
         viewHolder.mDateView = viewHolder.mItemLayout!!.findViewById(R.id.dateView)
-        viewHolder.mDateView!!.text = date
+        //viewHolder.mDateView!!.text = date
 
         viewHolder.mItemLayout!!.setTag(viewHolder)
 

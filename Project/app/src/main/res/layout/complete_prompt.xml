@@ -51,14 +51,14 @@
             android:id="@+id/statusDone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/done_string" />
+            android:text="@string/complete_string" />
 
         <RadioButton
             android:id="@+id/statusNotDone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checked="true"
-            android:text="@string/not_done_string" />
+            android:text="@string/incomplete_string" />
     </RadioGroup>
 
     <!-- Priority -->
@@ -177,4 +177,11 @@
         android:layout_alignParentRight="true"
         android:text="@string/submit_string" />
 
+    <SeekBar
+        android:id="@+id/seekBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/date_picker_button"
+        android:layout_alignParentTop="@+id/date_picker_button"
+        android:layout_marginBottom="-36dp" />
 </RelativeLayout>

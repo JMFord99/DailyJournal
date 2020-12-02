@@ -1,12 +1,12 @@
 <resources>
     <string name="app_name">DailyJournal</string>
-    <string name="done_string">Done:</string>
+    <string name="complete_string">Complete</string>
     <string name="mood_string">Mood:</string>
     <string name="date_string">Date:</string>
     <string name="title_string">Title</string>
     <string name="enter_title_string">Enter Title</string>
     <string name="status_string">Status</string>
-    <string name="not_done_string">Not Done</string>
+    <string name="incomplete_string">Incomplete</string>
     <string name="priority_string">Priority:</string>
     <string name="priority_low_string">Low</string>
     <string name="priority_medium_string">Medium</string>

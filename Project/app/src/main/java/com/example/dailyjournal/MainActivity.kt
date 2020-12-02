@@ -132,7 +132,8 @@ class MainActivity : ListActivity() {
                 if (title == null)
                     break
                 status = reader.readLine()
-                date = LocalDateTime.parse(reader.readLine(), JournalEntry.FORMAT)
+                //date = LocalDateTime.parse(reader.readLine(), JournalEntry.FORMAT)
+                date = LocalDateTime.now()
 
                 mAdapter.add(JournalEntry(title, mood,
                     JournalEntry.Status.valueOf(status), date, date))
