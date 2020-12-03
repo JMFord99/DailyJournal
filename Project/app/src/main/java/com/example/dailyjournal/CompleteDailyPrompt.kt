@@ -11,32 +11,33 @@ import java.util.*
 
 class CompleteDailyPrompt: Activity() {
     private var mDate: LocalDateTime? = null
-    private var mPriorityRadioGroup: RadioGroup? = null
     private var mStatusRadioGroup: RadioGroup? = null
     private var mTitleText: EditText? = null
     private var mDefaultStatusButton: RadioButton? = null
     private var mDefaultPriorityButton: RadioButton? = null
     private var dateView: TextView? = null
     private var timeView: TextView? = null
-
-   /* private val mood: Mood
-        get() {
-
-            when (mPriorityRadioGroup!!.checkedRadioButtonId) {
-                R.id.lowPriority -> {
-                    return Priority.LOW
-                }
-                R.id.highPriority -> {
-                    return Priority.HIGH
-                }
-                else -> {
-                    return Priority.MED
-                }
-            }
-        }
+    private var mood: TextView? = null
 
 
-    */
+    /* private val mood: Mood
+         get() {
+
+             when (mPriorityRadioGroup!!.checkedRadioButtonId) {
+                 R.id.lowPriority -> {
+                     return Priority.LOW
+                 }
+                 R.id.highPriority -> {
+                     return Priority.HIGH
+                 }
+                 else -> {
+                     return Priority.MED
+                 }
+             }
+         }
+
+
+     */
 
     private val status: JournalEntry.Status
         get() {
@@ -58,10 +59,12 @@ class CompleteDailyPrompt: Activity() {
         mTitleText = findViewById<View>(R.id.title) as EditText
         mDefaultStatusButton = findViewById<View>(R.id.statusNotDone) as RadioButton
         mDefaultPriorityButton = findViewById<View>(R.id.medPriority) as RadioButton
-        mPriorityRadioGroup = findViewById<View>(R.id.priorityGroup) as RadioGroup
         mStatusRadioGroup = findViewById<View>(R.id.statusGroup) as RadioGroup
         dateView = findViewById<View>(R.id.date) as TextView
         timeView = findViewById<View>(R.id.time) as TextView
+        mood = findViewById<View>(R.id.mood) as TextView
+        val seeker = findViewById<SeekBar>(R.id.seekBar)
+
 
         // Set the default date and time
 
@@ -97,10 +100,27 @@ class CompleteDailyPrompt: Activity() {
             Log.i(TAG, "Entered resetButton.OnClickListener.onClick()")
             setDefaultDateTime()
             mTitleText!!.setText("")
-            mPriorityRadioGroup!!.check(R.id.medPriority)
             mStatusRadioGroup!!.check(R.id.statusNotDone)
 
         }
+
+        seeker?.setOnSeekBarChangeListener(object :
+            SeekBar.OnSeekBarChangeListener {
+            override fun onProgressChanged(
+                seek: SeekBar,
+                progress: Int, fromUser: Boolean
+            ) {
+                mood!!.setText(progress.toString())
+
+            }
+
+            override fun onStartTrackingTouch(seekBar: SeekBar?) {
+            }
+
+            override fun onStopTrackingTouch(seekBar: SeekBar?) {
+
+            }
+        })
 
         // Set up OnClickListener for the Submit Button
 
@@ -116,7 +136,7 @@ class CompleteDailyPrompt: Activity() {
             //var priority = priority
             var status = status
 
-            var mood = 50 as Integer
+            var mood = Integer.valueOf(mood!!.getText().toString()) as Integer
 
             // TODO - return data Intent and finish
             val data = Intent()

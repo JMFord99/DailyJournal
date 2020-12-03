@@ -10,7 +10,7 @@ class JournalEntry {
 
     var prompt = String()
     var date = LocalDateTime.now()
-    var mood = 50 as Integer
+    var mood = 0 as Integer
     var status = Status.INCOMPLETE
     var lastUpdated = LocalDateTime.now()
 
@@ -38,6 +38,7 @@ class JournalEntry {
 
         prompt = intent.getStringExtra(JournalEntry.PROMPT).toString()
         status = Status.valueOf(intent.getStringExtra(JournalEntry.STATUS).toString())
+        mood = Integer.valueOf(intent.getStringExtra(JournalEntry.MOOD).toString()) as Integer
         //mood = intent.getStringExtra(intent.getStringExtra(JournalEntry.MOOD)) as Integer
 
         /*try {

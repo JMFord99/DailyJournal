@@ -122,8 +122,10 @@ class MainActivity : ListActivity() {
             val fis = openFileInput(FILE_NAME)
             reader = BufferedReader(InputStreamReader(fis))
 
+            var lines = reader.readLines()
+
             var title: String? = null
-            var mood = 50 as Integer
+            var mood: Integer?
             var status: String? = null
             var date: LocalDateTime? = null
 
@@ -134,6 +136,7 @@ class MainActivity : ListActivity() {
                 status = reader.readLine()
                 //date = LocalDateTime.parse(reader.readLine(), JournalEntry.FORMAT)
                 date = LocalDateTime.now()
+                mood = Integer.valueOf(reader.readLine()) as Integer
 
                 mAdapter.add(JournalEntry(title, mood,
                     JournalEntry.Status.valueOf(status), date, date))

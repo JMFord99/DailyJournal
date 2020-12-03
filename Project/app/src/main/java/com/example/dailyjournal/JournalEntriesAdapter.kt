@@ -66,7 +66,7 @@ class JournalEntriesAdapter(private val mContext: Context) : BaseAdapter() {
         //viewHolder.mStatusView!!.text = toDoItem.status.toString()
         viewHolder.mStatusView!!.setChecked(journalEntry.status == JournalEntry.Status.COMPLETE)
 
-        // TODO - Display Priority in a TextView
+        // TODO - Display Mood in a TextView
 
         viewHolder.mMoodView = viewHolder.mItemLayout!!.findViewById(R.id.moodView)
         viewHolder.mMoodView!!.text = journalEntry.mood.toString()

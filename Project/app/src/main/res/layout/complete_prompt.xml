@@ -27,7 +27,21 @@
         <requestFocus />
     </EditText>
 
+
     <!-- Status -->
+
+    <TextView
+        android:id="@+id/mood"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/seekBar"
+        android:layout_marginBottom="-43dp"
+        android:ems="10"
+        android:hint="0"
+        android:inputType="textShortMessage">
+
+        <requestFocus />
+    </TextView>
 
     <TextView
         android:id="@+id/status"
