@@ -57,7 +57,7 @@ class CompleteDailyPrompt: Activity() {
         val prompt = p.getPrompt(d)
 
 
-        mTitleText = findViewById<View>(R.id.title) as EditText
+        mTitleText = findViewById<View>(R.id.prompt) as EditText
         mDefaultStatusButton = findViewById<View>(R.id.statusNotDone) as RadioButton
         mDefaultPriorityButton = findViewById<View>(R.id.medPriority) as RadioButton
         mStatusRadioGroup = findViewById<View>(R.id.statusGroup) as RadioGroup

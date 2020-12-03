@@ -6,7 +6,7 @@
     <!-- Title -->
 
     <TextView
-        android:id="@+id/TitleLabel"
+        android:id="@+id/promptLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
@@ -17,11 +17,11 @@
         android:textAppearance="?android:attr/textAppearanceLarge"></TextView>
 
     <EditText
-        android:id="@+id/title"
+        android:id="@+id/prompt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/TitleLabel"
+        android:layout_below="@+id/promptLabel"
         android:ems="10"
         android:hint="@string/enter_title_string"
         android:inputType="textShortMessage" >
@@ -50,7 +50,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/title"
+        android:layout_below="@+id/prompt"
         android:layout_marginTop="8dp"
         android:text="@string/status_string"
         android:textAppearance="?android:attr/textAppearanceLarge" />

@@ -27,6 +27,13 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".FavoritesView">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+            </intent-filter>
+        </activity>
+
         <receiver android:process=":remote" android:name=".DailyReminder" />
 
     </application>

@@ -39,7 +39,6 @@ class Prompts {
         for(p in list) {
             if(date.equals(p.getDate()))
                 return p.getPrompt()
-
         }
         return "What color do you wear most and why?"
     }
@@ -50,8 +49,8 @@ class Prompts {
         fun readFileAsLinesUsingReadLines(fileName: String): List<String> = File(fileName).readLines()
         //var lines = readFileAsLinesUsingReadLines("")
 
-        val lines = arrayOf("January", "February", "March")
-        lines[0] = "Fave Color"
+        val lines = arrayOf("Favorite Color", "Favorite Drink", "Favorite Food")
+        //lines[0] = "Fave Color"
         var i = 0.toLong()
         for(line in lines) {
             var a = prompt(date.plusDays(i), line) as prompt
