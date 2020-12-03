@@ -7,37 +7,19 @@ import android.util.Log
 import java.time.LocalDateTime
 import android.view.View
 import android.widget.*
+import java.time.LocalDate
 import java.util.*
 
 class CompleteDailyPrompt: Activity() {
     private var mDate: LocalDateTime? = null
     private var mStatusRadioGroup: RadioGroup? = null
+    private var mFavoriteRadioGroup: RadioGroup? = null
     private var mTitleText: EditText? = null
     private var mDefaultStatusButton: RadioButton? = null
     private var mDefaultPriorityButton: RadioButton? = null
     private var dateView: TextView? = null
     private var timeView: TextView? = null
     private var mood: TextView? = null
-
-
-    /* private val mood: Mood
-         get() {
-
-             when (mPriorityRadioGroup!!.checkedRadioButtonId) {
-                 R.id.lowPriority -> {
-                     return Priority.LOW
-                 }
-                 R.id.highPriority -> {
-                     return Priority.HIGH
-                 }
-                 else -> {
-                     return Priority.MED
-                 }
-             }
-         }
-
-
-     */
 
     private val status: JournalEntry.Status
         get() {
@@ -52,56 +34,77 @@ class CompleteDailyPrompt: Activity() {
             }
         }
 
+    private val favorite: JournalEntry.Favorite
+        get() {
+
+            when (mStatusRadioGroup!!.checkedRadioButtonId) {
+                R.id.lowPriority -> {
+                    return JournalEntry.Favorite.YES
+                }
+                else -> {
+                    return JournalEntry.Favorite.NO
+                }
+            }
+        }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.complete_prompt)
+
+        val p = Prompts()
+        var d = LocalDate.now() as LocalDate
+
+        val prompt = p.getPrompt(d)
+
 
         mTitleText = findViewById<View>(R.id.title) as EditText
         mDefaultStatusButton = findViewById<View>(R.id.statusNotDone) as RadioButton
         mDefaultPriorityButton = findViewById<View>(R.id.medPriority) as RadioButton
         mStatusRadioGroup = findViewById<View>(R.id.statusGroup) as RadioGroup
-        dateView = findViewById<View>(R.id.date) as TextView
-        timeView = findViewById<View>(R.id.time) as TextView
+        mFavoriteRadioGroup = findViewById<View>(R.id.priorityGroup) as RadioGroup
+        //dateView = findViewById<View>(R.id.date) as TextView
+        //timeView = findViewById<View>(R.id.time) as TextView
         mood = findViewById<View>(R.id.mood) as TextView
         val seeker = findViewById<SeekBar>(R.id.seekBar)
 
 
+        mTitleText!!.setText(prompt)
         // Set the default date and time
 
-        setDefaultDateTime()
+       // setDefaultDateTime()
 
         // OnClickListener for the Date button, calls showDatePickerDialog() to
         // show
         // the Date dialog
 
-        val datePickerButton = findViewById<View>(R.id.date_picker_button) as Button
-        datePickerButton.setOnClickListener { showDatePickerDialog() }
+        //val datePickerButton = findViewById<View>(R.id.date_picker_button) as Button
+        //datePickerButton.setOnClickListener { showDatePickerDialog() }
 
         // OnClickListener for the Time button, calls showTimePickerDialog() to
         // show
         // the Time Dialog
 
-        val timePickerButton = findViewById<View>(R.id.time_picker_button) as Button
-        timePickerButton.setOnClickListener { showTimePickerDialog() }
+        //val timePickerButton = findViewById<View>(R.id.time_picker_button) as Button
+        //timePickerButton.setOnClickListener { showTimePickerDialog() }
 
         // OnClickListener for the Cancel Button,
 
-        val cancelButton = findViewById<View>(R.id.cancelButton) as Button
-        cancelButton.setOnClickListener { Log.i(TAG, "Entered cancelButton.OnClickListener.onClick()")
+        //val cancelButton = findViewById<View>(R.id.cancelButton) as Button
+        /*cancelButton.setOnClickListener { Log.i(TAG, "Entered cancelButton.OnClickListener.onClick()")
 
             // TODO - Indicate result and finish
             setResult(Activity.RESULT_CANCELED)
             finish()
-        }
+        }*/
 
         // TODO - Set up OnClickListener for the Reset Button
         val resetButton = findViewById<View>(R.id.resetButton) as Button
         resetButton.setOnClickListener {
             Log.i(TAG, "Entered resetButton.OnClickListener.onClick()")
-            setDefaultDateTime()
+            //setDefaultDateTime()
             mTitleText!!.setText("")
             mStatusRadioGroup!!.check(R.id.statusNotDone)
-
+            mFavoriteRadioGroup!!.check(R.id.medPriority)
         }
 
         seeker?.setOnSeekBarChangeListener(object :
@@ -135,12 +138,13 @@ class CompleteDailyPrompt: Activity() {
             var date = dateString + " " + timeString
             //var priority = priority
             var status = status
+            var favorite = favorite
 
             var mood = Integer.valueOf(mood!!.getText().toString()) as Integer
 
             // TODO - return data Intent and finish
             val data = Intent()
-            JournalEntry.packageIntent(data, title, mood, status, date, date)
+            JournalEntry.packageIntent(data, title, mood, status, date, date, favorite)
 
             setResult(Activity.RESULT_OK, data)
             finish()
@@ -148,7 +152,7 @@ class CompleteDailyPrompt: Activity() {
         }
     }
 
-    private fun setDefaultDateTime() {
+    /*private fun setDefaultDateTime() {
 
         // Default is current time + 7 days
         mDate = LocalDateTime.now()
@@ -166,6 +170,8 @@ class CompleteDailyPrompt: Activity() {
 
         timeView!!.text = timeString
     }
+    */
+
 
     // DialogFragment used to pick a ToDoItem deadline date
 

@@ -12,18 +12,24 @@ class JournalEntry {
     var date = LocalDateTime.now()
     var mood = 0 as Integer
     var status = Status.INCOMPLETE
+    var favorite = Favorite.NO
     var lastUpdated = LocalDateTime.now()
 
     enum class Status {
         INCOMPLETE, COMPLETE
     }
 
-    internal constructor(prompt: String, mood: Integer, status: Status, date: LocalDateTime, lastUpdated: LocalDateTime) {
+    enum class Favorite {
+        YES, NO
+    }
+
+    internal constructor(prompt: String, mood: Integer, status: Status, date: LocalDateTime, lastUpdated: LocalDateTime, favorite: Favorite) {
         this.prompt = prompt
         this.mood = mood
         this.status = status
         this.date = date
         this.lastUpdated = lastUpdated
+        this.favorite = favorite
     }
 
     fun toLog(): String {
@@ -40,7 +46,7 @@ class JournalEntry {
         status = Status.valueOf(intent.getStringExtra(JournalEntry.STATUS).toString())
         mood = Integer.valueOf(intent.getStringExtra(JournalEntry.MOOD).toString()) as Integer
         //mood = intent.getStringExtra(intent.getStringExtra(JournalEntry.MOOD)) as Integer
-
+        favorite = Favorite.valueOf(intent.getStringExtra(JournalEntry.FAVORITE).toString())
         /*try {
             date = LocalDateTime.parse(intent.getStringExtra(JournalEntry.DATE), FORMAT)
             lastUpdated = LocalDateTime.parse(intent.getStringExtra(JournalEntry.LASTUPDATED), FORMAT)
@@ -83,6 +89,7 @@ class JournalEntry {
         val DATE = "date"
         val MOOD = "mood"
         val LASTUPDATED = "lastUpdated"
+        val FAVORITE = "favorite"
 
         val FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS")
 
@@ -91,13 +98,15 @@ class JournalEntry {
         // package them for transport in an Intent
 
         fun packageIntent(intent: Intent, prompt: String,
-                          mood: Integer, status: Status, date: String, lastUpdated: String) {
+                          mood: Integer, status: Status, date: String, lastUpdated: String, favorite: Favorite) {
 
             intent.putExtra(JournalEntry.PROMPT, prompt)
             intent.putExtra(JournalEntry.MOOD, mood.toString())
             intent.putExtra(JournalEntry.STATUS, status.toString())
             intent.putExtra(JournalEntry.DATE, date)
             intent.putExtra(JournalEntry.LASTUPDATED, lastUpdated)
+            intent.putExtra(JournalEntry.FAVORITE, favorite.toString())
+
         }
     }
 

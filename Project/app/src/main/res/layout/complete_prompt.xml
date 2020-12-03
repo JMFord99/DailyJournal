@@ -9,10 +9,12 @@
         android:id="@+id/TitleLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
         android:layout_marginTop="8dp"
-        android:text="@string/title_string"
-        android:textAppearance="?android:attr/textAppearanceLarge" >
-    </TextView>
+        android:layout_marginEnd="171dp"
+        android:gravity="center_horizontal"
+        android:text="Prompt"
+        android:textAppearance="?android:attr/textAppearanceLarge"></TextView>
 
     <EditText
         android:id="@+id/title"
@@ -59,6 +61,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@id/status"
+        android:gravity="center_horizontal"
         android:orientation="horizontal" >
 
         <RadioButton
@@ -84,7 +87,7 @@
         android:layout_alignParentLeft="true"
         android:layout_below="@id/statusGroup"
         android:layout_marginTop="8dp"
-        android:text="@string/priority_string"
+        android:text="Favorite?"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <RadioGroup
@@ -94,86 +97,22 @@
         android:layout_alignParentLeft="true"
         android:layout_below="@id/priority"
         android:orientation="horizontal"
+        android:gravity="center_horizontal"
         android:text="@string/priority_string" >
 
         <RadioButton
             android:id="@+id/lowPriority"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/priority_low_string" />
+            android:text="YES" />
 
         <RadioButton
             android:id="@+id/medPriority"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checked="true"
-            android:text="@string/priority_medium_string" />
-
-        <RadioButton
-            android:id="@+id/highPriority"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/priority_high_string" />
+            android:text="NO" />
     </RadioGroup>
-
-    <!-- Time and Date -->
-
-    <TextView
-        android:id="@+id/time_and_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@id/priorityGroup"
-        android:layout_marginTop="8dp"
-        android:text="@string/time_and_date_string"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <TextView
-        android:id="@+id/date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/time_and_date"
-        android:layout_marginTop="8dp"
-        android:text="@string/no_date_set_string" />
-
-    <TextView
-        android:id="@+id/time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/time_and_date"
-        android:layout_marginTop="8dp"
-        android:text="@string/no_time_set_string" />
-
-    <Button
-        android:id="@+id/date_picker_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_marginTop="8dp"
-        android:layout_below="@id/date"
-        android:text="@string/choose_date_string" />
-
-    <Button
-        android:id="@+id/time_picker_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignTop="@id/date_picker_button"
-        android:layout_below="@id/time"
-        android:layout_marginTop="8dp"
-        android:text="@string/choose_time_string" />
-
-    <!-- Buttons -->
-
-    <Button
-        android:id="@+id/cancelButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:text="@string/cancel_string" />
 
     <Button
         android:id="@+id/resetButton"
@@ -191,11 +130,38 @@
         android:layout_alignParentRight="true"
         android:text="@string/submit_string" />
 
+    <TextView
+        android:id="@+id/seekBarGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/priorityGroup"
+        android:text="How are you feeling?"
+        android:textAppearance="?android:attr/textAppearanceLarge"></TextView>
+
     <SeekBar
         android:id="@+id/seekBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/date_picker_button"
-        android:layout_alignParentTop="@+id/date_picker_button"
-        android:layout_marginBottom="-36dp" />
+        android:layout_below="@+id/seekBarGroup" />
+
+
+    <TextView
+        android:id="@+id/entryTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/seekBar"
+        android:gravity="center_horizontal"
+        android:text="Entry"
+        android:textAppearance="?android:attr/textAppearanceLarge"></TextView>
+
+    <EditText
+        android:id="@+id/entry"
+        android:lines="15"
+        android:gravity="top|start"
+        android:inputType="textMultiLine"        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/entryTitle"
+        android:hint="Type your entry here">
+        <requestFocus />
+    </EditText>
 </RelativeLayout>

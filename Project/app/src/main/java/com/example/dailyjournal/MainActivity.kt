@@ -127,6 +127,7 @@ class MainActivity : ListActivity() {
             var title: String? = null
             var mood: Integer?
             var status: String? = null
+            var favorite: String?
             var date: LocalDateTime? = null
 
             do {
@@ -134,13 +135,13 @@ class MainActivity : ListActivity() {
                 if (title == null)
                     break
                 status = reader.readLine()
+                favorite = reader.readLine()
                 //date = LocalDateTime.parse(reader.readLine(), JournalEntry.FORMAT)
                 date = LocalDateTime.now()
                 mood = Integer.valueOf(reader.readLine()) as Integer
 
                 mAdapter.add(JournalEntry(title, mood,
-                    JournalEntry.Status.valueOf(status), date, date))
-
+                    JournalEntry.Status.valueOf(status), date, date, JournalEntry.Favorite.valueOf(favorite)))
             }
             while (true)
 
