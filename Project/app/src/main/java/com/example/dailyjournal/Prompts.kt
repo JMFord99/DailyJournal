@@ -48,9 +48,11 @@ class Prompts {
         var date = LocalDate.now()
 
         fun readFileAsLinesUsingReadLines(fileName: String): List<String> = File(fileName).readLines()
-        var lines = readFileAsLinesUsingReadLines("")
+        //var lines = readFileAsLinesUsingReadLines("")
 
-        var i = 0 as Long
+        val lines = arrayOf("January", "February", "March")
+        lines[0] = "Fave Color"
+        var i = 0.toLong()
         for(line in lines) {
             var a = prompt(date.plusDays(i), line) as prompt
             list.add(a)
