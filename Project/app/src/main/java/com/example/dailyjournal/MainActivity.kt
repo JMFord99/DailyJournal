@@ -82,12 +82,6 @@ class MainActivity: AppCompatActivity() {
         }
     }
 
-
-
-
-
-
-
     fun setAlarm() {
         var mAlarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
 
