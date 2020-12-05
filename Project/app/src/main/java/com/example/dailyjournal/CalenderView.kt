@@ -24,7 +24,9 @@ class CalenderView : AppCompatActivity(){
             //Should open a JournalEntry here of specfic date
             date.text = "$month/$dayOfMonth/$year"
             Toast.makeText(applicationContext, "$month/$dayOfMonth/$year", Toast.LENGTH_LONG).show()
+
             val intent = Intent(this, com.example.dailyjournal.FavoritesView::class.java);
+            intent.putExtra("date", date.text.toString())
             startActivity(intent);
         })
 

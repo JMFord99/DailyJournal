@@ -24,6 +24,7 @@ class FavoritesView : ListActivity() {
         super.onCreate(savedInstanceState)
         //setContentView(R.layout.footer_view) crashes program if left in
 
+        val filter = intent.getStringExtra("date")
         mAdapter = JournalEntriesAdapter(applicationContext)
 
 

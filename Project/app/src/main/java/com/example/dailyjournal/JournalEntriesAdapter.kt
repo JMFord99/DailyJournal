@@ -8,10 +8,7 @@ import android.widget.BaseAdapter
 import android.widget.CheckBox
 import android.widget.RelativeLayout
 import android.widget.TextView
-import java.text.SimpleDateFormat
-import java.time.LocalDate
-
-import java.util.ArrayList
+import java.util.*
 
 class JournalEntriesAdapter(private val mContext: Context) : BaseAdapter() {
 
@@ -74,12 +71,12 @@ class JournalEntriesAdapter(private val mContext: Context) : BaseAdapter() {
 
         // TODO - Display Time and Date
 
-        val pattern = "yyyy-MM-dd 'at' HH:mm:ss"
-        val simpleDateFormat = SimpleDateFormat(pattern)
-        //val date = simpleDateFormat.format(journalEntry.date)
+        // val pattern = "yyyy-MM-dd 'at' HH:mm:ss"
+        // val simpleDateFormat = SimpleDateFormat(pattern, Locale.US)
+        // val date = simpleDateFormat.format(journalEntry.date)
 
         viewHolder.mDateView = viewHolder.mItemLayout!!.findViewById(R.id.dateView)
-        //viewHolder.mDateView!!.text = date
+        viewHolder.mDateView!!.text = journalEntry.date.toString().subSequence(0, 10)
 
         viewHolder.mItemLayout!!.setTag(viewHolder)
 
