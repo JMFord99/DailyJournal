@@ -35,6 +35,25 @@ class MainActivity: AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setAlarm()
 
+        var fav_button = findViewById<Button>(R.id.favorites_button)
+        var prompt_button = findViewById<Button>(R.id.create_prompt_button)
+        var past_button = findViewById<Button>(R.id.past_entries_button)
+
+        fav_button.setOnClickListener {
+            val intent = Intent(this, com.example.dailyjournal.FavoritesView::class.java)
+            startActivity(intent)
+        }
+
+        prompt_button.setOnClickListener {
+            val intent = Intent(applicationContext, CompleteDailyPrompt::class.java)
+            startActivityForResult(intent, 0)
+        }
+
+        past_button.setOnClickListener {
+            val intent = Intent(this, com.example.dailyjournal.CalenderView::class.java)
+            startActivity(intent)
+        }
+
     }
 
 
@@ -59,9 +78,6 @@ class MainActivity: AppCompatActivity() {
 
         val inflater = menuInflater
         inflater.inflate(R.menu.bottom_navigation_menu, menu)
-
-        menu.add(Menu.NONE, MENU_DELETE, Menu.NONE, "Delete all")
-        menu.add(Menu.NONE, MENU_DUMP, Menu.NONE, "Dump to log")
         return true
     }
 

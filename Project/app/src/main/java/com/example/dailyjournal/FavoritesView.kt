@@ -22,7 +22,7 @@ class FavoritesView : ListActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        //setContentView(R.layout.footer_view) crashes program if left in
 
         mAdapter = JournalEntriesAdapter(applicationContext)
 
