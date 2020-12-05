@@ -24,6 +24,7 @@ class FavoritesView : ListActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val filter = intent.getStringExtra("date")
         mAdapter = JournalEntriesAdapter(applicationContext)
 
 

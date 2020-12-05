@@ -69,6 +69,7 @@ class CompleteDailyPrompt: Activity() {
 
 
         mTitleText!!.setText(prompt)
+        mood!!.setText("0")
         // Set the default date and time
 
        // setDefaultDateTime()
@@ -133,14 +134,19 @@ class CompleteDailyPrompt: Activity() {
 
             // TODO - gather ToDoItem data
 
+            val c = Calendar.getInstance()
+            val year = c.get(Calendar.YEAR)
+            val month = c.get(Calendar.MONTH)
+            val dayOfMonth = c.get(Calendar.DAY_OF_MONTH)
 
             var title = mTitleText!!.getText().toString()
-            var date = dateString + " " + timeString
+            var date = "$month/$dayOfMonth/$year"
+            //var date = dateString + " " + timeString
             //var priority = priority
             var status = status
             var favorite = favorite
 
-            var mood = Integer.valueOf(mood!!.getText().toString()) as Integer
+            var mood = Integer.valueOf(mood!!.text.toString()) as Integer
 
             // TODO - return data Intent and finish
             val data = Intent()
