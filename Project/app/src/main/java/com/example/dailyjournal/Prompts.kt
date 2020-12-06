@@ -1,21 +1,20 @@
 package com.example.dailyjournal
 
-import java.io.File
-import java.io.InputStream
+import android.content.Context
+import android.content.Intent
+import java.io.*
 import java.time.LocalDate
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
-import com.example.dailyjournal.*
 
 class Prompts {
+    private lateinit var file: File
+    private val filename = "pastPrompts.txt"
 
-
-    class prompt {
+    //class prompt {
         val p: String
         val d: LocalDate
 
-        internal constructor(date: LocalDate, prompt: String) {
-            this.p = prompt
+        internal constructor(date: LocalDate, prompt: Array<String>?) {
+            this.p = prompt.toString()
             this.d = date
         }
 
@@ -26,21 +25,59 @@ class Prompts {
         fun getPrompt(): String {
             return p
         }
-    }
+    //}
 
 
     var created = false
-    var list: MutableList<prompt> = ArrayList()
+    //var list: MutableList<prompt> = ArrayList()
+    lateinit var intent : Intent
 
-    fun getPrompt(date: LocalDate): String {
-        if(list.isEmpty())
-            createList()
+   // fun getPrompt(date: LocalDate): String {
+       // if(list.isEmpty())
+           // createList()
 
-        for(p in list) {
-            if(date.equals(p.getDate()))
-                return p.getPrompt()
-        }
-        return "What color do you wear most and why?"
+        //for(p in list) {
+            //if(date.equals(p.getDate()))
+            //return p.getPrompt()
+    //    }
+    //    return "What color do you wear most and why?"
+    //}
+
+
+    //getter for file
+    fun get(date: LocalDate, context: Context): Prompts {
+        intent = getIntent(context)
+        val prompt = Prompts(date, intent.getStringArrayExtra(date.toString()))
+        return prompt
+    }
+
+    // saver for file
+    fun save(prompt: Prompts, context: Context) {
+        intent = getIntent(context)
+        intent.putExtra(prompt.getDate().toString(), prompt.getPrompt())
+
+        val filePath = context.filesDir.absolutePath
+
+        file = File("$filePath/filename")
+        val fos: FileOutputStream =
+            context.openFileOutput(file.toString(), Context.MODE_PRIVATE)
+        val os = ObjectOutputStream(fos)
+        os.writeObject(intent)
+        os.close()
+        fos.close()
+    }
+
+    //helper
+    fun getIntent(context: Context): Intent {
+        val filePath = context.filesDir.absolutePath
+        file = File("$filePath/filename")
+
+        val fis: FileInputStream = context.openFileInput(file.toString())
+        val ist = ObjectInputStream(fis)
+        intent = ist.readObject() as Intent
+        ist.close()
+        fis.close()
+        return intent
     }
 
     fun createList() {
@@ -52,13 +89,12 @@ class Prompts {
         val lines = arrayOf("Favorite Color", "Favorite Drink", "Favorite Food")
         //lines[0] = "Fave Color"
         var i = 0.toLong()
-        for(line in lines) {
-            var a = prompt(date.plusDays(i), line) as prompt
-            list.add(a)
-            i++
+        //for(line in lines) {
+         //   var a = prompt(date.plusDays(i), line) as prompt
+         //   list.add(a)
+         //   i++
         }
 
 
     }
 
-}
