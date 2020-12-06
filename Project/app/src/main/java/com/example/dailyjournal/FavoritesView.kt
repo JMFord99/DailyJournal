@@ -85,6 +85,8 @@ class FavoritesView : ListActivity() {
             var favorite: String?
             var date: LocalDateTime? = null
 
+            var count = 1
+
             do {
                 title = reader.readLine();
                 if (title == null)
@@ -95,10 +97,13 @@ class FavoritesView : ListActivity() {
                 date = LocalDateTime.now()
                 mood = Integer.valueOf(reader.readLine()) as Integer
 
-                mAdapter.add(JournalEntry(title, mood,
-                    JournalEntry.Status.valueOf(status), date, date, JournalEntry.Favorite.valueOf(favorite)))
+                if(favorite == "YES"){
+                    mAdapter.add(JournalEntry(title, mood,
+                        JournalEntry.Status.valueOf(status), date, date, JournalEntry.Favorite.valueOf(favorite)))
+                }
+                count++
             }
-            while (true)
+            while (count < 5)
 
         } catch (e: FileNotFoundException) {
             e.printStackTrace()
