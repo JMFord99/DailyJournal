@@ -80,6 +80,7 @@ class FavoritesView : ListActivity() {
             var lines = reader.readLines()
 
             var title: String? = null
+            var entry: String? = null
             var mood: Integer?
             var status: String? = null
             var favorite: String?
@@ -89,7 +90,10 @@ class FavoritesView : ListActivity() {
 
             do {
                 title = reader.readLine();
+                entry = reader.readLine();
                 if (title == null)
+                    break
+                if (entry == null)
                     break
                 status = reader.readLine()
                 favorite = reader.readLine()
@@ -98,7 +102,7 @@ class FavoritesView : ListActivity() {
                 mood = Integer.valueOf(reader.readLine()) as Integer
 
                 if(favorite == "YES"){
-                    mAdapter.add(JournalEntry(title, mood,
+                    mAdapter.add(JournalEntry(title, entry, mood,
                         JournalEntry.Status.valueOf(status), date, JournalEntry.Favorite.valueOf(favorite)))
                 }
                 count++
