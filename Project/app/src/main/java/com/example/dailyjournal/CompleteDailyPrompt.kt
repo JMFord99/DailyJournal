@@ -7,6 +7,7 @@ import android.util.Log
 import java.time.LocalDateTime
 import android.view.View
 import android.widget.*
+import androidx.core.app.ActivityCompat
 import java.time.LocalDate
 import java.util.*
 
@@ -36,7 +37,7 @@ class CompleteDailyPrompt: Activity() {
     private val favorite: JournalEntry.Favorite
         get() {
             when (mStatusRadioGroup!!.checkedRadioButtonId) {
-                R.id.status_yes -> {
+                R.id.lowPriority -> {
                     return JournalEntry.Favorite.YES
                 }
                 else -> {
@@ -57,9 +58,9 @@ class CompleteDailyPrompt: Activity() {
 
         mTitleText = findViewById<View>(R.id.prompt) as EditText
         mDefaultStatusButton = findViewById<View>(R.id.statusNotDone) as RadioButton
-        mDefaultPriorityButton = findViewById<View>(R.id.status_no) as RadioButton
+        mDefaultPriorityButton = findViewById<View>(R.id.medPriority) as RadioButton
         mStatusRadioGroup = findViewById<View>(R.id.statusGroup) as RadioGroup
-        mFavoriteRadioGroup = findViewById<View>(R.id.status_group) as RadioGroup
+        mFavoriteRadioGroup = findViewById<View>(R.id.priorityGroup) as RadioGroup
         //dateView = findViewById<View>(R.id.date) as TextView
         //timeView = findViewById<View>(R.id.time) as TextView
         mood = findViewById<View>(R.id.mood) as TextView
@@ -104,7 +105,7 @@ class CompleteDailyPrompt: Activity() {
             //setDefaultDateTime()
             mTitleText!!.setText("")
             mStatusRadioGroup!!.check(R.id.statusNotDone)
-            mFavoriteRadioGroup!!.check(R.id.status_no)
+            mFavoriteRadioGroup!!.check(R.id.medPriority)
         }
 
         seeker?.setOnSeekBarChangeListener(object :
@@ -134,7 +135,7 @@ class CompleteDailyPrompt: Activity() {
             var title = mTitleText!!.getText().toString()
             // var date = dateString + " " + timeString
             var date = LocalDateTime.now()
-             //var priority = priority
+            //var priority = priority
             var status = status
             var favorite = favorite
 
@@ -151,7 +152,7 @@ class CompleteDailyPrompt: Activity() {
             )
 
             Log.d("saving", "does it save")
-            entry.save(this)
+            entry.save(entry, this)
 
             // TODO - return data Intent and finish
             /*val data = Intent()
