@@ -83,12 +83,17 @@ class JournalEntry {
         //val filePath = context.filesDir.absolutePath
         //file = File("$filePath/pastPrompts")
 
-        val fis: FileInputStream = context.openFileInput("pastPrompts")
-        val ist = ObjectInputStream(fis)
-        val entry = ist.readObject() as JournalEntry
-        ist.close()
-        fis.close()
-        return entry
+        var text = ("Prompt:" + prompt + ITEM_SEP + "Mood:" + mood
+                + ITEM_SEP + "Status:" + status + ITEM_SEP + "Date:"
+                + FORMAT.format(date) + "\n")
+
+        val fos: FileOutputStream =
+            context.openFileOutput("pastPrompts", Context.MODE_PRIVATE)
+        val os = ObjectOutputStream(fos)
+        os.writeObject(text)
+        os.flush()
+        os.close()
+        fos.close()
     }
     
     //sqlite 

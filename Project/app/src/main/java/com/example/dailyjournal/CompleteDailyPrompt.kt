@@ -158,8 +158,8 @@ class CompleteDailyPrompt: Activity() {
             /*val data = Intent()
             JournalEntry.packageIntent(data, title, mood, status, date, date, favorite)
 
-            setResult(Activity.RESULT_OK, data)
-            finish()*/
+            setResult(Activity.RESULT_OK, data)*/
+            finish()
         }
     }
 
