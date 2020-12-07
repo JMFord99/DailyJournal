@@ -152,7 +152,7 @@ class CompleteDailyPrompt: Activity() {
             )
 
             Log.d("saving", "does it save")
-            entry.save(this)
+            entry.save(entry, this)
 
             // TODO - return data Intent and finish
             /*val data = Intent()

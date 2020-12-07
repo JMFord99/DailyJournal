@@ -65,7 +65,7 @@ class JournalEntry {
 
 
     // saver for file
-    fun save(context: Context) {
+    fun save(entry: JournalEntry, context: Context) {
 
         //val filePath = context.filesDir.absolutePath
         //file = File("$filePath/pastPrompts")
@@ -77,8 +77,7 @@ class JournalEntry {
         val fos: FileOutputStream =
             context.openFileOutput("pastPrompts", Context.MODE_PRIVATE)
         val os = ObjectOutputStream(fos)
-        os.writeObject(text)
-        os.flush()
+        os.writeObject(entry)
         os.close()
         fos.close()
     }

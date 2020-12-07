@@ -23,7 +23,7 @@
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/promptLabel"
         android:ems="10"
-        android:hint="@string/enter_title_string"
+        android:hint="Add your own prompt here!"
         android:inputType="textShortMessage" >
 
         <requestFocus />
@@ -91,23 +91,22 @@
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <RadioGroup
-        android:id="@+id/priorityGroup"
+        android:id="@+id/status_group"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@id/priority"
         android:orientation="horizontal"
-        android:gravity="center_horizontal"
-        android:text="@string/priority_string" >
+        android:gravity="center_horizontal">
 
         <RadioButton
-            android:id="@+id/lowPriority"
+            android:id="@+id/status_yes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="YES" />
 
         <RadioButton
-            android:id="@+id/medPriority"
+            android:id="@+id/status_no"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checked="true"
@@ -134,7 +133,7 @@
         android:id="@+id/seekBarGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/priorityGroup"
+        android:layout_below="@+id/status_group"
         android:text="How are you feeling?"
         android:textAppearance="?android:attr/textAppearanceLarge"></TextView>
 
@@ -146,12 +145,12 @@
 
 
     <TextView
-        android:id="@+id/entryTitle"
+        android:id="@+id/prompt_entry"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/seekBar"
         android:gravity="center_horizontal"
-        android:text="Entry"
+        android:text="Thoughts"
         android:textAppearance="?android:attr/textAppearanceLarge"></TextView>
 
     <EditText
@@ -160,8 +159,8 @@
         android:gravity="top|start"
         android:inputType="textMultiLine"        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/entryTitle"
-        android:hint="Type your entry here">
+        android:layout_below="@+id/prompt_entry"
+        android:hint="Respond to your prompt here">
         <requestFocus />
     </EditText>
 </RelativeLayout>
