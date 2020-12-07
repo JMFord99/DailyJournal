@@ -11,6 +11,7 @@ import java.io.*
 class JournalEntry {
 
     var prompt = String()
+    var title = String()
     var date = LocalDateTime.now()
     var mood = 0 as Integer
     var status = Status.INCOMPLETE
@@ -28,7 +29,8 @@ class JournalEntry {
         YES, NO
     }
 
-    internal constructor(prompt: String, mood: Integer, status: Status, date: LocalDateTime, favorite: Favorite) {
+    internal constructor(title: String, prompt: String, mood: Integer, status: Status, date: LocalDateTime, favorite: Favorite) {
+        this.title = title
         this.prompt = prompt
         this.mood = mood
         this.status = status
@@ -37,7 +39,7 @@ class JournalEntry {
     }
 
     fun toLog(): String {
-        return ("Prompt:" + prompt + ITEM_SEP + "Mood:" + mood
+        return ("Title" + title + "Prompt:" + prompt + ITEM_SEP + "Mood:" + mood
                 + ITEM_SEP + "Status:" + status + ITEM_SEP + "Date:"
                 + FORMAT.format(date) + "\n")
     }
@@ -47,6 +49,7 @@ class JournalEntry {
     internal constructor(intent: Intent) {
 
         prompt = intent.getStringExtra(JournalEntry.PROMPT).toString()
+        title = intent.getStringExtra(JournalEntry.TITLE).toString()
         status = Status.valueOf(intent.getStringExtra(JournalEntry.STATUS).toString())
         mood = Integer.valueOf(intent.getStringExtra(JournalEntry.MOOD).toString()) as Integer
         //mood = intent.getStringExtra(intent.getStringExtra(JournalEntry.MOOD)) as Integer
@@ -69,6 +72,7 @@ class JournalEntry {
 
         val FILE_NAME = "Data.txt"
         val PROMPT = "prompt"
+        val TITLE = "title"
         val STATUS = "status"
         val DATE = "date"
         val MOOD = "mood"
@@ -80,8 +84,9 @@ class JournalEntry {
         // Take a set of String data values and
         // package them for transport in an Intent
 
-        fun packageIntent(intent: Intent, prompt: String, mood: Integer, status: Status, date: String, favorite: Favorite) {
+        fun packageIntent(intent: Intent, title: String, prompt: String, mood: Integer, status: Status, date: String, favorite: Favorite) {
 
+            intent.putExtra(JournalEntry.TITLE, title)
             intent.putExtra(JournalEntry.PROMPT, prompt)
             intent.putExtra(JournalEntry.MOOD, mood.toString())
             intent.putExtra(JournalEntry.STATUS, status.toString())

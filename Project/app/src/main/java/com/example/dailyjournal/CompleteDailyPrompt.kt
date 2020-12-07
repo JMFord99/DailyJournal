@@ -16,6 +16,7 @@ class CompleteDailyPrompt: Activity() {
     private var mDate: LocalDateTime? = null
     private var mStatusRadioGroup: RadioGroup? = null
     private var mFavoriteRadioGroup: RadioGroup? = null
+    private var mTitle: TextView? = null
     private var mEntryText: EditText? = null
     private var mDefaultStatusButton: RadioButton? = null
     private var mDefaultPriorityButton: RadioButton? = null
@@ -56,6 +57,7 @@ class CompleteDailyPrompt: Activity() {
         //val prompt = p.get(d, this)
 
         mEntryText = findViewById<View>(R.id.entry) as EditText
+        mTitle = findViewById<View>(R.id.prompt) as EditText
         mDefaultStatusButton = findViewById<View>(R.id.statusNotDone) as RadioButton
         mDefaultPriorityButton = findViewById<View>(R.id.status_yes) as RadioButton
         mStatusRadioGroup = findViewById<View>(R.id.statusGroup) as RadioGroup
@@ -101,6 +103,7 @@ class CompleteDailyPrompt: Activity() {
             // TODO - gather ToDoItem data
 
             var entry = mEntryText!!.getText().toString()
+            var title = mTitle!!.text.toString()
            // var date = dateString + " " + timeString
             var date = LocalDateTime.now()
             //var priority = priority
@@ -122,7 +125,7 @@ class CompleteDailyPrompt: Activity() {
 
             // TODO - return data Intent and finish
             val data = Intent()
-            JournalEntry.packageIntent(data, entry, mood, status, date.toString(), favorite)
+            JournalEntry.packageIntent(data, title, entry, mood, status, date.toString(), favorite)
 
             setResult(Activity.RESULT_OK, data)
             finish()

@@ -27,6 +27,7 @@ class ReadPast : AppCompatActivity() {
                     var data = it.split("~")
                     date.text = chosen_date
                     prompt.text = data[1]
+                    entry.text = data[2]
                 }
 
             }
