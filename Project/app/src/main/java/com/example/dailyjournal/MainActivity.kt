@@ -100,6 +100,16 @@ class MainActivity: AppCompatActivity() {
         br.forEachLine {
             arrayList.add(it + sep)
         }
+        /*
+        // For Testing
+        var data = "2020-12-06T13:35:52.140~bbbbbbbbb\n2020-12-05" +
+        "T13:35:52.140~cccccccccc\n2020-12-04T13:35:52.140~ddddddddd\n2020-12-03T13:35:52.140~eeeeeeeee" +
+                "\n2020-11-01T13:35:52.140~fffffffff\n2020-11-30T13:35:52.140~ggggggggg\n" +
+                "2020-11-25T13:35:52.140~hhhhhhhhh\n2020-11-20T13:35:52.140~iiiiiiiii\n" +
+                "2020-11-15T13:35:52.140~jjjjjjjjj\n"
+        data.split("\n").forEach {
+            arrayList.add(it + sep)
+        }*/
         br.close()
     }
 
