@@ -42,6 +42,7 @@ class MainActivity: AppCompatActivity() {
 
         fav_button.setOnClickListener {
             val intent = Intent(this, com.example.dailyjournal.FavoritesView::class.java)
+            intent.putExtra("arrayList", arrayList)
             startActivity(intent)
         }
 
@@ -71,8 +72,12 @@ class MainActivity: AppCompatActivity() {
         if(resultCode == ListActivity.RESULT_OK && requestCode == ADD_TODO_ITEM_REQUEST) {
             val journalEntryItem: JournalEntry = JournalEntry(data as Intent)
             mAdapter.add(journalEntryItem)
+            var fav = "0"
+            if (journalEntryItem.favorite.name == "YES") {
+                fav = "1"
+            }
             writeFile(journalEntryItem.date.toString() +
-            "~" + journalEntryItem.title + "~" + journalEntryItem.prompt)
+            "~" + journalEntryItem.title + "~" + journalEntryItem.prompt + "~" + fav)
         }
     }
 
@@ -103,13 +108,13 @@ class MainActivity: AppCompatActivity() {
         }
 
         br.close()
-        /*
+
         // For Testing
-        var data = "2020-12-07T13:35:52.140~bbbbbbbbb~entry127\n2020-12-05" +
-        "T13:35:52.140~cccccccccc~entry125\n2020-12-04T13:35:52.140~ddddddddd~entry124\n2020-12-03T13:35:52.140~eeeeeeeee~entry123" +
-                "\n2020-11-01T13:35:52.140~fffffffff~entry111\n2020-11-30T13:35:52.140~ggggggggg~entry11130\n" +
-                "2020-11-25T13:35:52.140~hhhhhhhhh~entry1125\n2020-11-20T13:35:52.140~iiiiiiiii~entry112-\n" +
-                "2020-11-15T13:35:52.140~jjjjjjjjj~entry1115\n"
+        /*var data = "2020-12-07T13:35:52.140~bbbbbbbbb~entry127~1\n2020-12-06" +
+        "T13:35:52.140~cccccccccc~entry126~0\n2020-12-04T13:35:52.140~ddddddddd~entry124~1\n2020-12-03T13:35:52.140~eeeeeeeee~entry123~1" +
+                "\n2020-11-01T13:35:52.140~fffffffff~entry111~0\n2020-11-30T13:35:52.140~ggggggggg~entry11130~1\n" +
+                "2020-11-25T13:35:52.140~hhhhhhhhh~entry1125~0\n2020-11-20T13:35:52.140~iiiiiiiii~entry112-~1\n" +
+                "2020-11-15T13:35:52.140~jjjjjjjjj~entry1115~1\n"
 
         data.split("\n").forEach {
             arrayList.add(it + sep)

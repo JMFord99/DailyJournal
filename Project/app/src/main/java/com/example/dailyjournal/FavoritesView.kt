@@ -6,14 +6,50 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
-import android.widget.CalendarView
-import android.widget.TextView
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import java.io.*
 import java.text.ParseException
 import java.time.LocalDateTime
 
 
+class FavoritesView : AppCompatActivity() {
+
+    private lateinit var favorites: ListView
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.favorites)
+
+        favorites = findViewById<ListView>(R.id.fav_list_view)
+
+        // Gets arraylist of filled journal entries
+        val arrayList = intent.getStringArrayListExtra("arrayList")
+        var found = false;
+        if (arrayList != null) {
+            val listOne = arrayListOf<String>()
+
+            // Searches the arraylist for the user selected date.
+            var i = 0
+            for (i in 0 until (arrayList.size - 1)) {
+                var data = arrayList.get(i).split("~")
+                if (data[3].contains("1")) {
+                    listOne.add(data[1])
+                }
+            }
+
+            val listItems = arrayOfNulls<String>(listOne.size)
+            i = 0;
+            for (i in 0 until listOne.size) {
+                listItems[i] = listOne.get(i)
+            }
+
+            val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, listItems)
+            favorites.adapter = adapter
+        }
+    }
+}
+/*
 class FavoritesView : ListActivity() {
     var mCal: CalendarView? = null
     private lateinit var date: TextView
@@ -186,4 +222,4 @@ class FavoritesView : ListActivity() {
     }
 
 
-}
+}*/

@@ -28,6 +28,8 @@ class ReadPast : AppCompatActivity() {
                     date.text = chosen_date
                     prompt.text = data[1]
                     entry.text = data[2]
+                    if (data[3].contains("1"))
+                        mood.text = "Favorited"
                 }
 
             }

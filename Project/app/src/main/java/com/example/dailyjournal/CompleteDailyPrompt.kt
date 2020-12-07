@@ -36,7 +36,7 @@ class CompleteDailyPrompt: Activity() {
 
     private val favorite: JournalEntry.Favorite
         get() {
-            when (mStatusRadioGroup!!.checkedRadioButtonId) {
+            when (mFavoriteRadioGroup!!.checkedRadioButtonId) {
                 R.id.status_yes -> {
                     return JournalEntry.Favorite.YES
                 }
