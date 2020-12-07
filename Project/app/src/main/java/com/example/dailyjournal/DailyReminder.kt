@@ -25,17 +25,20 @@ class DailyReminder : BroadcastReceiver() {
     private val mVibratePattern = longArrayOf(0, 200, 200, 300)
 
     private val channelID = "my_channel_01"
+
+    // When the alarm goes off sends notification
     override fun onReceive(context: Context, intent: Intent?) {
         Log.i("DailyJournal", "Logging Alarm at: " +
                 DateFormat.getDateTimeInstance().format(Date()))
         Toast.makeText(
-                context, "Send Alarm Plz",
+                context, "Sending Alarm",
                 Toast.LENGTH_LONG
         ).show()
         mContext = context
         mNotificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         createNotificationChannel()
 
+        // Create initial notification and then pending notification
         val mNotificationIntent = Intent(context, MainActivity::class.java)
                 .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
 
@@ -43,19 +46,22 @@ class DailyReminder : BroadcastReceiver() {
                 context, 0,
                 mNotificationIntent, PendingIntent.FLAG_UPDATE_CURRENT)
 
+        // Build notification to be sent. Tell user to fill out their journal.
         val notificationBuilder = Notification.Builder(
                 mContext, mChannelID
-        ).setTicker("Ticker Test Attempt")
+        ).setTicker("Ticker")
                 .setSmallIcon(android.R.drawable.stat_sys_warning)
                 .setAutoCancel(true).setContentTitle("Do Journal")
                 .setContentText("You Should fill out your journal entry, or else.")
                 .setContentIntent(mContentIntent)
 
+        // Sends Notification
         mNotificationManager.notify(MY_NOTIFICATION_ID, notificationBuilder.build())
         Log.i("DailyJournal","Send notification as:" +
                 DateFormat.getDateTimeInstance().format(Date()))
     }
 
+    // Creates channel to send notification
     private fun createNotificationChannel() {
 
         mChannelID = mContext.packageName + ".channel_01"
@@ -73,7 +79,7 @@ class DailyReminder : BroadcastReceiver() {
         mChannel.enableLights(true)
 
         // Sets the notification light color for notifications posted to this
-        // channel, if the device supports this feature.
+        // channel, if the device supports this feature. And vibration.
         mChannel.lightColor = Color.RED
         mChannel.enableVibration(true)
         mChannel.vibrationPattern = mVibratePattern
@@ -82,8 +88,6 @@ class DailyReminder : BroadcastReceiver() {
     }
 
     companion object {
-
-
         private const val TAG = "Lab-Notifications"
         private const val MY_NOTIFICATION_ID = 11151990
     }
