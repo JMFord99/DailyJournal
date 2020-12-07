@@ -7,6 +7,12 @@ import android.widget.CalendarView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 
+/*
+This class is used to read past data that is stored. It reads an arrayList which is
+packaged in the intent. the list is created from reading the file line by line.
+Each line in the array list is one journal entry separated by "~". We separate the entry
+to get all the data out of it.
+ */
 class ReadPast : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {

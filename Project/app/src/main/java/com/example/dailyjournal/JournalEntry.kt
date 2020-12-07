@@ -8,6 +8,11 @@ import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.io.*
 
+
+/*
+
+This class contains the data for one journal entry. Each entry is stores in the mAdapter
+ */
 class JournalEntry {
 
     var prompt = String()
@@ -29,6 +34,10 @@ class JournalEntry {
         YES, NO
     }
 
+    // Constructor for a journal entry object
+    // Contians a title, which is a header, tue prompt, which is their jorunal entry,
+    // a mood between 1 and 100, a complete/incomplete status, a date, and whether or not the post
+    // is a favorite.
     internal constructor(title: String, prompt: String, mood: Integer, status: Status, date: LocalDateTime, favorite: Favorite) {
         this.title = title
         this.prompt = prompt
@@ -38,6 +47,7 @@ class JournalEntry {
         this.favorite = favorite
     }
 
+    // Converts the current object to a single string for logging purposes
     fun toLog(): String {
         return ("Title" + title + "Prompt:" + prompt + ITEM_SEP + "Mood:" + mood
                 + ITEM_SEP + "Status:" + status + ITEM_SEP + "Date:"
@@ -45,7 +55,6 @@ class JournalEntry {
     }
 
     // Create a new ToDoItem from data packaged in an Intent
-
     internal constructor(intent: Intent) {
 
         prompt = intent.getStringExtra(JournalEntry.PROMPT).toString()

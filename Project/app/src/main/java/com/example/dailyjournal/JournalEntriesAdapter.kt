@@ -22,20 +22,24 @@ class JournalEntriesAdapter(private val mContext: Context) : BaseAdapter() {
     }
 
 
+    // Returns item at position
     override fun getItem(pos: Int): Any {
         return mItems[pos]
     }
 
+    // returns item position
     override fun getItemId(pos: Int): Long {
         return pos.toLong()
     }
 
+    //returns number of items stored
     override fun getCount(): Int {
 
         return mItems.size
 
     }
 
+    // creates the view
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
 
         val journalEntry = getItem(position) as JournalEntry
@@ -53,23 +57,23 @@ class JournalEntriesAdapter(private val mContext: Context) : BaseAdapter() {
             viewHolder.mStatusView!!.setOnCheckedChangeListener(null)
         }
 
-        // TODO - Display Prompt in TextView
+        // Display Prompt in TextView
 
         viewHolder.mPromptView = viewHolder.mItemLayout!!.findViewById(R.id.promptView)
         viewHolder.mPromptView!!.text = journalEntry.prompt
 
-        // TODO - Set up Status CheckBox
+        // Set up Status CheckBox
 
         viewHolder.mStatusView = viewHolder.mItemLayout!!.findViewById(R.id.statusCheckBox)
         //viewHolder.mStatusView!!.text = toDoItem.status.toString()
         viewHolder.mStatusView!!.setChecked(journalEntry.status == JournalEntry.Status.COMPLETE)
 
-        // TODO - Display Mood in a TextView
+        // Display Mood in a TextView
 
         viewHolder.mMoodView = viewHolder.mItemLayout!!.findViewById(R.id.moodView)
         viewHolder.mMoodView!!.text = journalEntry.mood.toString()
 
-        // TODO - Display Time and Date
+        // Display Date
 
         // val pattern = "yyyy-MM-dd 'at' HH:mm:ss"
         // val simpleDateFormat = SimpleDateFormat(pattern, Locale.US)

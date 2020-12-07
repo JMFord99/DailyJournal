@@ -78,6 +78,7 @@ class MainActivity: AppCompatActivity() {
 
 
 
+    // writes data to a file
     @Throws(FileNotFoundException::class)
     private fun writeFile(str: String) {
 
@@ -91,6 +92,7 @@ class MainActivity: AppCompatActivity() {
 
     }
 
+    // reads data from the file to load
     @Throws(IOException::class)
     private fun readFile() {
 
@@ -121,6 +123,7 @@ class MainActivity: AppCompatActivity() {
 
 
 
+    // when resume is called, we read file
     public override fun onResume() {
         super.onResume()
 
@@ -138,6 +141,7 @@ class MainActivity: AppCompatActivity() {
 
     }
 
+    // creates options menu in top right corner
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
        super.onCreateOptionsMenu(menu)
 
@@ -146,6 +150,7 @@ class MainActivity: AppCompatActivity() {
         return true
     }
 
+    // adds past and favorites to the options menu
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
         return when (item.itemId) {
@@ -163,6 +168,7 @@ class MainActivity: AppCompatActivity() {
         }
     }
 
+    // Alarm the sends a notification to the user reminding them to complete their daily journal entry
     fun setAlarm() {
         var mAlarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
 
