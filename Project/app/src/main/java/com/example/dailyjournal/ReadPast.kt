@@ -24,9 +24,11 @@ class ReadPast : AppCompatActivity() {
         var mood = findViewById<TextView>(R.id.mood)
         var date = findViewById<TextView>(R.id.date)
 
+        // Get arraylist of data items
         val arrayList = intent.getStringArrayListExtra("arrayList")
         val chosen_date = intent.getStringExtra("date")
 
+        // Searches the arraylist for the user selected date and displays the items in the view
         if (arrayList != null) {
             arrayList.forEach {
                 if (it.contains(chosen_date.toString())){
