@@ -53,12 +53,12 @@ class Prompts {
 
     // saver for file
     fun save(prompt: Prompts, context: Context) {
-        intent = getIntent(context)
-        intent.putExtra(prompt.getDate().toString(), prompt.getPrompt())
+        //intent = getIntent(context)
+        //intent.putExtra(prompt.getDate().toString(), prompt.getPrompt())
 
-        val filePath = context.filesDir.absolutePath
+        //val filePath = context.filesDir.absolutePath
 
-        file = File("$filePath/filename")
+        //file = File("$filePath/filename")
         val fos: FileOutputStream =
             context.openFileOutput(file.toString(), Context.MODE_PRIVATE)
         val os = ObjectOutputStream(fos)
@@ -69,10 +69,10 @@ class Prompts {
 
     //helper
     fun getIntent(context: Context): Intent {
-        val filePath = context.filesDir.absolutePath
-        file = File("$filePath/filename")
+        //val filePath = context.filesDir.absolutePath
+        //file = File("$filePath/filename")
 
-        val fis: FileInputStream = context.openFileInput(file.toString())
+        val fis: FileInputStream = context.openFileInput("pastPrompts")
         val ist = ObjectInputStream(fis)
         intent = ist.readObject() as Intent
         ist.close()
@@ -80,7 +80,7 @@ class Prompts {
         return intent
     }
 
-    fun createList() {
+    /*fun createList() {
         var date = LocalDate.now()
 
         fun readFileAsLinesUsingReadLines(fileName: String): List<String> = File(fileName).readLines()
@@ -93,7 +93,7 @@ class Prompts {
          //   var a = prompt(date.plusDays(i), line) as prompt
          //   list.add(a)
          //   i++
-        }
+        }*/
 
 
     }

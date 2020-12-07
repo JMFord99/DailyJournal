@@ -18,6 +18,7 @@ class JournalEntry {
     var lastUpdated = LocalDateTime.now()
     lateinit var dataIntent : Intent
     private lateinit var file: File
+    private val filename = "pastPrompts"
 
 
     enum class Status {
@@ -66,11 +67,11 @@ class JournalEntry {
     // saver for file
     fun save(context: Context) {
 
-        val filePath = context.filesDir.absolutePath
-        file = File("$filePath/filename")
+        //val filePath = context.filesDir.absolutePath
+        //file = File("$filePath/pastPrompts")
 
         val fos: FileOutputStream =
-            context.openFileOutput(file.toString(), Context.MODE_PRIVATE)
+            context.openFileOutput("pastPrompts", Context.MODE_PRIVATE)
         val os = ObjectOutputStream(fos)
         os.writeObject(this)
         os.close()
@@ -79,10 +80,10 @@ class JournalEntry {
 
     //helper
     fun get(context: Context): JournalEntry {
-        val filePath = context.filesDir.absolutePath
-        file = File("$filePath/filename")
+        //val filePath = context.filesDir.absolutePath
+        //file = File("$filePath/pastPrompts")
 
-        val fis: FileInputStream = context.openFileInput(file.toString())
+        val fis: FileInputStream = context.openFileInput("pastPrompts")
         val ist = ObjectInputStream(fis)
         val entry = ist.readObject() as JournalEntry
         ist.close()
