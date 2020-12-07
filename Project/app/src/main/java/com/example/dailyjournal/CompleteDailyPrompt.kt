@@ -1,12 +1,13 @@
 package com.example.dailyjournal
 
+import android.Manifest
 import android.app.*
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import java.time.LocalDateTime
 import android.view.View
 import android.widget.*
+import androidx.core.app.ActivityCompat
 import java.time.LocalDate
 import java.util.*
 
@@ -23,7 +24,6 @@ class CompleteDailyPrompt: Activity() {
 
     private val status: JournalEntry.Status
         get() {
-
             when (mStatusRadioGroup!!.checkedRadioButtonId) {
                 R.id.statusDone -> {
                     return JournalEntry.Status.COMPLETE
@@ -36,7 +36,6 @@ class CompleteDailyPrompt: Activity() {
 
     private val favorite: JournalEntry.Favorite
         get() {
-
             when (mStatusRadioGroup!!.checkedRadioButtonId) {
                 R.id.lowPriority -> {
                     return JournalEntry.Favorite.YES
@@ -131,10 +130,7 @@ class CompleteDailyPrompt: Activity() {
 
         val submitButton = findViewById<View>(R.id.submitButton) as Button
         submitButton.setOnClickListener {
-            Log.i(TAG, "Entered submitButton.OnClickListener.onClick()")
-
             // TODO - gather ToDoItem data
-
 
             var title = mTitleText!!.getText().toString()
             var date = dateString + " " + timeString
@@ -144,13 +140,25 @@ class CompleteDailyPrompt: Activity() {
 
             var mood = Integer.valueOf(mood!!.getText().toString()) as Integer
 
+            val entry = JournalEntry(title, mood, status, date as LocalDateTime, lastUpdated = date, favorite = favorite)
+            requestPermissions(
+                arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
+                REQUEST_WRITE_PERMISSION
+            )
+            requestPermissions(
+                arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
+                REQUEST_READ_PERMISSION
+            )
+
+            Log.d("saving", "does it save")
+            entry.save(this)
+
             // TODO - return data Intent and finish
-            val data = Intent()
+            /*val data = Intent()
             JournalEntry.packageIntent(data, title, mood, status, date, date, favorite)
 
             setResult(Activity.RESULT_OK, data)
-            finish()
-
+            finish()*/
         }
     }
 
@@ -234,6 +242,8 @@ class CompleteDailyPrompt: Activity() {
     }
 
     companion object {
+        val REQUEST_WRITE_PERMISSION = 1
+        val REQUEST_READ_PERMISSION = 2
 
         // 7 days in milliseconds - 7 * 24 * 60 * 60 * 1000
 

@@ -1,10 +1,12 @@
 package com.example.dailyjournal
 
+import android.Manifest
+import android.content.Context
 import android.content.Intent
-import java.text.ParseException
+import androidx.core.app.ActivityCompat.requestPermissions
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
-import android.database.sqlite.SQLiteDatabase
+import java.io.*
 
 class JournalEntry {
 
@@ -14,6 +16,9 @@ class JournalEntry {
     var status = Status.INCOMPLETE
     var favorite = Favorite.NO
     var lastUpdated = LocalDateTime.now()
+    lateinit var dataIntent : Intent
+    private lateinit var file: File
+
 
     enum class Status {
         INCOMPLETE, COMPLETE
@@ -56,16 +61,44 @@ class JournalEntry {
         }*/
 
     }
+
+
+    // saver for file
+    fun save(context: Context) {
+
+        val filePath = context.filesDir.absolutePath
+        file = File("$filePath/filename")
+
+        val fos: FileOutputStream =
+            context.openFileOutput(file.toString(), Context.MODE_PRIVATE)
+        val os = ObjectOutputStream(fos)
+        os.writeObject(this)
+        os.close()
+        fos.close()
+    }
+
+    //helper
+    fun get(context: Context): JournalEntry {
+        val filePath = context.filesDir.absolutePath
+        file = File("$filePath/filename")
+
+        val fis: FileInputStream = context.openFileInput(file.toString())
+        val ist = ObjectInputStream(fis)
+        val entry = ist.readObject() as JournalEntry
+        ist.close()
+        fis.close()
+        return entry
+    }
     
     //sqlite 
-    fun createDatabase(db: SQLiteDatabase){
+    /*fun createDatabase(db: SQLiteDatabase){
         db.execSQL("CREATE TABLE entries(" +
                 "entry_date DATE," +
                 "entry_text STRING," +
                 "mood INTEGER);")
-    }
+    }*/
 
-    fun addEntry(db: SQLiteDatabase){
+    /*fun addEntry(db: SQLiteDatabase){
         db.execSQL("INSERT INTO entries VALUES (" + dateFormat(date) + ", " + prompt + ", " + mood + ");")
     }
 
@@ -77,10 +110,12 @@ class JournalEntry {
         val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
         val formatted = date.format(formatter)
         return formatted
-    }
+    }*/
 
 
     companion object {
+
+
 
         val ITEM_SEP = System.getProperty("line.separator")
 
@@ -109,7 +144,4 @@ class JournalEntry {
 
         }
     }
-
-
-
 }
