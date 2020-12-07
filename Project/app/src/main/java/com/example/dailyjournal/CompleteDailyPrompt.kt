@@ -133,7 +133,8 @@ class CompleteDailyPrompt: Activity() {
             // TODO - gather ToDoItem data
 
             var title = mTitleText!!.getText().toString()
-            var date = dateString + " " + timeString
+            // var date = dateString + " " + timeString
+            var date = LocalDateTime.now()
             //var priority = priority
             var status = status
             var favorite = favorite
