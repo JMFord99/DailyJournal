@@ -14,14 +14,16 @@ import androidx.appcompat.app.AppCompatActivity
 class CalenderView : AppCompatActivity(){
     var mCal: CalendarView? = null
     private lateinit var date: TextView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.calander_view)
         mCal = findViewById(R.id.simpleCalendarView)
         date = findViewById(R.id.date)
 
+        // When someone clicks on date opens that days prompt
         mCal?.setOnDateChangeListener(OnDateChangeListener { view, year, month, dayOfMonth ->
-            //Should open a JournalEntry here of specfic date
+            //Should open a JournalEntry here of specific date
             date.text = "$month/$dayOfMonth/$year"
             Toast.makeText(applicationContext, "$month/$dayOfMonth/$year", Toast.LENGTH_LONG).show()
 
@@ -32,19 +34,17 @@ class CalenderView : AppCompatActivity(){
 
     }
 
+    // Creates option menu to allow you to select a menu or day.
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         super.onCreateOptionsMenu(menu)
 
         val inflater = menuInflater
         inflater.inflate(R.menu.bottom_navigation_menu, menu)
-
-        menu.add(Menu.NONE, Menu.FIRST, Menu.NONE, "Delete all")
-        menu.add(Menu.NONE, Menu.FIRST + 1, Menu.NONE, "Dump to log")
         return true
     }
 
+    // Startes intents based off options menu selection.
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-
         return when (item.itemId) {
             R.id.nav_past -> {
                 val intent = Intent(this, CalenderView::class.java);
