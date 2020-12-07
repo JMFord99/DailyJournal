@@ -99,7 +99,7 @@ class FavoritesView : ListActivity() {
 
                 if(favorite == "YES"){
                     mAdapter.add(JournalEntry(title, mood,
-                        JournalEntry.Status.valueOf(status), date, date, JournalEntry.Favorite.valueOf(favorite)))
+                        JournalEntry.Status.valueOf(status), date, JournalEntry.Favorite.valueOf(favorite)))
                 }
                 count++
             }

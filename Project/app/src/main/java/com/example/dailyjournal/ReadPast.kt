@@ -23,9 +23,7 @@ class ReadPast : AppCompatActivity() {
 
         if (arrayList != null) {
             arrayList.forEach {
-                Log.i("test", "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
                 if (it.contains(chosen_date.toString())){
-
                     var data = it.split("~")
                     date.text = chosen_date
                     prompt.text = data[1]
