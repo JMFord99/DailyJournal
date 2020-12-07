@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="center_horizontal"
-    android:text="@string/add_new_todo_item_string"
+    android:text="@string/complete_todays_prompt"
     android:textSize="24sp" >
 
 </TextView>

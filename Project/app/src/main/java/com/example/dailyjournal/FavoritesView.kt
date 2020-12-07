@@ -152,7 +152,7 @@ class FavoritesView : ListActivity() {
     companion object {
 
         private val ADD_TODO_ITEM_REQUEST = 0
-        private val FILE_NAME = "TodoManagerActivityData.txt"
+        private val FILE_NAME = "pastPrompts.txt"
         private val TAG = "Lab-UserInterface"
 
         // IDs for menu items
