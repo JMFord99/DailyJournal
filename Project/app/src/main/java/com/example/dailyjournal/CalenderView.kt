@@ -9,10 +9,7 @@ import android.widget.CalendarView.OnDateChangeListener
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import java.text.DateFormat
-import java.text.SimpleDateFormat
 import java.time.LocalDateTime
-import java.util.*
 
 
 class CalenderView : AppCompatActivity(){
@@ -27,7 +24,7 @@ class CalenderView : AppCompatActivity(){
 
         // When someone clicks on date opens that days prompt
         mCal?.setOnDateChangeListener(OnDateChangeListener { view, year, month, dayOfMonth ->
-            //Should open a JournalEntry here of specific date
+            // Formats the user selected date
             var monthplus = month+1
             var day_str = dayOfMonth.toString()
             var month_str = monthplus.toString()
@@ -41,13 +38,15 @@ class CalenderView : AppCompatActivity(){
             var date_formatted = "$year-" + month_str + "-" + day_str
 
 
-
+            // Gets arraylist of filled journal entries
             val arrayList = intent.getStringArrayListExtra("arrayList")
             var found = false;
 
+            // Searches the arraylist for the user selected date.
             if (arrayList != null) {
                 arrayList.forEach {
                     if (it.contains(date_formatted.toString())){
+                        // If it finds the date it makes an intent to view the date.
                         date.text = date_formatted
                         Toast.makeText(applicationContext, date_formatted, Toast.LENGTH_LONG).show()
                         val intent = Intent(this, com.example.dailyjournal.ReadPast::class.java)
@@ -61,10 +60,13 @@ class CalenderView : AppCompatActivity(){
             }
 
             var cur = LocalDateTime.now().toString()
+            // If the date is today and the prompts wasn't created it opens up a prompt to fill out
             if (cur.contains(date_formatted) && !found) {
                 val intent = Intent(applicationContext, CompleteDailyPrompt::class.java)
                 startActivityForResult(intent, 0)
             } else if (!found){
+                // If the date wan't today and there was no prompt it makes a toast to inform the
+                // user no prompt was made for that day.
                 date.text = date_formatted
                 Toast.makeText(applicationContext, "No entry written for $date_formatted", Toast.LENGTH_LONG).show()
             }
