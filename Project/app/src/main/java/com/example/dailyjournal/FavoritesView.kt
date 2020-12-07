@@ -29,7 +29,7 @@ class FavoritesView : AppCompatActivity() {
         if (arrayList != null) {
             val listOne = arrayListOf<String>()
 
-            // Searches the arraylist for the user selected date.
+            // Searches the arraylist for favorite items
             var i = 0
             for (i in 0 until (arrayList.size - 1)) {
                 var data = arrayList.get(i).split("~")
@@ -38,12 +38,14 @@ class FavoritesView : AppCompatActivity() {
                 }
             }
 
+            // Add favorite items to array
             val listItems = arrayOfNulls<String>(listOne.size)
             i = 0;
             for (i in 0 until listOne.size) {
                 listItems[i] = listOne.get(i)
             }
 
+            // Display favorite items
             val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, listItems)
             favorites.adapter = adapter
         }
