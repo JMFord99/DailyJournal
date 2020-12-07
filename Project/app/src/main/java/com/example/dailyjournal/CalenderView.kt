@@ -9,6 +9,10 @@ import android.widget.CalendarView.OnDateChangeListener
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import java.text.DateFormat
+import java.text.SimpleDateFormat
+import java.time.LocalDateTime
+import java.util.*
 
 
 class CalenderView : AppCompatActivity(){
@@ -36,15 +40,34 @@ class CalenderView : AppCompatActivity(){
             }
             var date_formatted = "$year-" + month_str + "-" + day_str
 
-            date.text = date_formatted
-            Toast.makeText(applicationContext, date_formatted, Toast.LENGTH_LONG).show()
+
 
             val arrayList = intent.getStringArrayListExtra("arrayList")
+            var found = false;
 
-            val intent = Intent(this, com.example.dailyjournal.ReadPast::class.java)
-            intent.putExtra("date", date_formatted)
-            intent.putExtra("arrayList", arrayList)
-            startActivity(intent)
+            if (arrayList != null) {
+                arrayList.forEach {
+                    if (it.contains(date_formatted.toString())){
+                        date.text = date_formatted
+                        Toast.makeText(applicationContext, date_formatted, Toast.LENGTH_LONG).show()
+                        val intent = Intent(this, com.example.dailyjournal.ReadPast::class.java)
+                        intent.putExtra("date", date_formatted)
+                        intent.putExtra("arrayList", arrayList)
+                        startActivity(intent)
+                        found = true;
+                    }
+
+                }
+            }
+
+            var cur = LocalDateTime.now().toString()
+            if (cur.contains(date_formatted) && !found) {
+                val intent = Intent(applicationContext, CompleteDailyPrompt::class.java)
+                startActivityForResult(intent, 0)
+            } else if (!found){
+                date.text = date_formatted
+                Toast.makeText(applicationContext, "No entry written for $date_formatted", Toast.LENGTH_LONG).show()
+            }
 
         })
 
