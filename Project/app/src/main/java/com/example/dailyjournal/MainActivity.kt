@@ -26,6 +26,7 @@ import java.util.*
 class MainActivity: AppCompatActivity() {
 
     internal lateinit var faves: Button
+    internal lateinit var mAdapter: JournalEntriesAdapter
 
 
 
@@ -38,6 +39,8 @@ class MainActivity: AppCompatActivity() {
         var fav_button = findViewById<Button>(R.id.favorites_button)
         var prompt_button = findViewById<Button>(R.id.create_prompt_button)
         var past_button = findViewById<Button>(R.id.past_entries_button)
+        mAdapter = JournalEntriesAdapter(applicationContext)
+
 
         fav_button.setOnClickListener {
             val intent = Intent(this, com.example.dailyjournal.FavoritesView::class.java)
@@ -53,7 +56,22 @@ class MainActivity: AppCompatActivity() {
             val intent = Intent(this, com.example.dailyjournal.CalenderView::class.java)
             startActivity(intent)
         }
+    }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        Log.i(TAG, "Entered onActivityResult()")
+
+        // TODO - Check result code and request code
+        // if user submitted a new ToDoItem
+        // Create a new ToDoItem from the data Intent
+        // and then add it to the adapter
+
+        if(resultCode == ListActivity.RESULT_OK && requestCode == ADD_TODO_ITEM_REQUEST) {
+            val journalEntryItem: JournalEntry = JournalEntry(data as Intent)
+            mAdapter.add(journalEntryItem)
+        }
     }
 
 

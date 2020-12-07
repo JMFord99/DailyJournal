@@ -2,6 +2,7 @@ package com.example.dailyjournal
 
 import android.Manifest
 import android.app.*
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import java.time.LocalDateTime
@@ -18,8 +19,6 @@ class CompleteDailyPrompt: Activity() {
     private var mTitleText: EditText? = null
     private var mDefaultStatusButton: RadioButton? = null
     private var mDefaultPriorityButton: RadioButton? = null
-    private var dateView: TextView? = null
-    private var timeView: TextView? = null
     private var mood: TextView? = null
 
     private val status: JournalEntry.Status
@@ -37,7 +36,7 @@ class CompleteDailyPrompt: Activity() {
     private val favorite: JournalEntry.Favorite
         get() {
             when (mStatusRadioGroup!!.checkedRadioButtonId) {
-                R.id.lowPriority -> {
+                R.id.status_yes -> {
                     return JournalEntry.Favorite.YES
                 }
                 else -> {
@@ -58,9 +57,9 @@ class CompleteDailyPrompt: Activity() {
 
         mTitleText = findViewById<View>(R.id.prompt) as EditText
         mDefaultStatusButton = findViewById<View>(R.id.statusNotDone) as RadioButton
-        mDefaultPriorityButton = findViewById<View>(R.id.medPriority) as RadioButton
+        mDefaultPriorityButton = findViewById<View>(R.id.status_yes) as RadioButton
         mStatusRadioGroup = findViewById<View>(R.id.statusGroup) as RadioGroup
-        mFavoriteRadioGroup = findViewById<View>(R.id.priorityGroup) as RadioGroup
+        mFavoriteRadioGroup = findViewById<View>(R.id.status_group) as RadioGroup
         //dateView = findViewById<View>(R.id.date) as TextView
         //timeView = findViewById<View>(R.id.time) as TextView
         mood = findViewById<View>(R.id.mood) as TextView
@@ -105,7 +104,7 @@ class CompleteDailyPrompt: Activity() {
             //setDefaultDateTime()
             mTitleText!!.setText("")
             mStatusRadioGroup!!.check(R.id.statusNotDone)
-            mFavoriteRadioGroup!!.check(R.id.medPriority)
+            mFavoriteRadioGroup!!.check(R.id.status_yes)
         }
 
         seeker?.setOnSeekBarChangeListener(object :
@@ -133,13 +132,14 @@ class CompleteDailyPrompt: Activity() {
             // TODO - gather ToDoItem data
 
             var title = mTitleText!!.getText().toString()
-            // var date = dateString + " " + timeString
+           // var date = dateString + " " + timeString
             var date = LocalDateTime.now()
             //var priority = priority
             var status = status
             var favorite = favorite
 
-            var mood = Integer.valueOf(mood!!.getText().toString()) as Integer
+            var mood = 10 as Integer
+            //var mood = Integer.valueOf(mood!!.getText().toString()) as Integer
 
             val entry = JournalEntry(title, mood, status, date as LocalDateTime, lastUpdated = date, favorite = favorite)
             requestPermissions(
@@ -155,11 +155,11 @@ class CompleteDailyPrompt: Activity() {
             entry.save(entry, this)
 
             // TODO - return data Intent and finish
-            /*val data = Intent()
-            JournalEntry.packageIntent(data, title, mood, status, date, date, favorite)
+            val data = Intent()
+            JournalEntry.packageIntent(data, title, mood, status, date.toString(), date.toString(), favorite)
 
             setResult(Activity.RESULT_OK, data)
-            finish()*/
+            finish()
         }
     }
 
