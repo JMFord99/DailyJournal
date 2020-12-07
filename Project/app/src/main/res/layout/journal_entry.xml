@@ -69,8 +69,4 @@
         android:layout_alignBaseline="@+id/DateLabel"
         android:layout_toRightOf="@+id/DateLabel" >
     </TextView>
-
-
-
-
 </RelativeLayout>

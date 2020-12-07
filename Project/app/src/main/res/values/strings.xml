@@ -8,7 +8,6 @@
     <string name="title_string">Title</string>
     <string name="enter_title_string">Enter Title</string>
     <string name="status_string">Status</string>
-    <string name="priority_string">Priority:</string>
     <string name="cancel_string">Cancel</string>
     <string name="reset_string">Reset</string>
     <string name="submit_string">Submit</string>
