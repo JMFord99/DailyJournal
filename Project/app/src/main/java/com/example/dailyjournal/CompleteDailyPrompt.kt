@@ -151,9 +151,6 @@ class CompleteDailyPrompt: Activity() {
                 REQUEST_READ_PERMISSION
             )
 
-            Log.d("saving", "does it save")
-            entry.save(entry, this)
-
             // TODO - return data Intent and finish
             val data = Intent()
             JournalEntry.packageIntent(data, title, mood, status, date.toString(), date.toString(), favorite)

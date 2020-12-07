@@ -17,6 +17,13 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".ReadPast">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+            </intent-filter>
+        </activity>
+
         <activity android:name=".CompleteDailyPrompt" />
 
         <activity android:name=".CalenderView">

@@ -25,11 +25,9 @@ import java.util.*
 
 class MainActivity: AppCompatActivity() {
 
-    internal lateinit var faves: Button
     internal lateinit var mAdapter: JournalEntriesAdapter
 
-
-
+    val arrayList = ArrayList<String>() //Creating an empty arraylist.
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,6 +52,8 @@ class MainActivity: AppCompatActivity() {
 
         past_button.setOnClickListener {
             val intent = Intent(this, com.example.dailyjournal.CalenderView::class.java)
+            intent.putExtra("arrayList", arrayList)
+
             startActivity(intent)
         }
     }
@@ -71,8 +71,40 @@ class MainActivity: AppCompatActivity() {
         if(resultCode == ListActivity.RESULT_OK && requestCode == ADD_TODO_ITEM_REQUEST) {
             val journalEntryItem: JournalEntry = JournalEntry(data as Intent)
             mAdapter.add(journalEntryItem)
+            writeFile(journalEntryItem.date.toString() + "~" + journalEntryItem.prompt)
         }
     }
+
+
+
+    @Throws(FileNotFoundException::class)
+    private fun writeFile(str: String) {
+
+        val fos = openFileOutput(FILE_NAME, Context.MODE_PRIVATE)
+
+        val pw = PrintWriter(BufferedWriter(OutputStreamWriter(fos)))
+
+        pw.println(str)
+
+        pw.close()
+
+    }
+
+    @Throws(IOException::class)
+    private fun readFile() {
+
+        val sep = System.getProperty("line.separator")
+        val fis = openFileInput(FILE_NAME)
+        val br = BufferedReader(InputStreamReader(fis))
+
+        br.forEachLine {
+            arrayList.add(it + sep)
+        }
+        br.close()
+    }
+
+
+
 
 
 
@@ -80,6 +112,7 @@ class MainActivity: AppCompatActivity() {
         super.onResume()
 
         // Load saved ToDoItems, if necessary
+        readFile()
 
 
     }
@@ -88,6 +121,7 @@ class MainActivity: AppCompatActivity() {
         super.onPause()
 
         // Save ToDoItems
+
 
     }
 
@@ -134,7 +168,7 @@ class MainActivity: AppCompatActivity() {
     companion object {
 
         private val ADD_TODO_ITEM_REQUEST = 0
-        private val FILE_NAME = "TodoManagerActivityData.txt"
+        val FILE_NAME = "Data.txt"
         private val TAG = "Lab-UserInterface"
 
         // IDs for menu items

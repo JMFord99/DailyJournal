@@ -120,6 +120,7 @@ class JournalEntry {
 
         val ITEM_SEP = System.getProperty("line.separator")
 
+        val FILE_NAME = "Data.txt"
         val PROMPT = "prompt"
         val STATUS = "status"
         val DATE = "date"

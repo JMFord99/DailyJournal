@@ -24,12 +24,28 @@ class CalenderView : AppCompatActivity(){
         // When someone clicks on date opens that days prompt
         mCal?.setOnDateChangeListener(OnDateChangeListener { view, year, month, dayOfMonth ->
             //Should open a JournalEntry here of specific date
-            date.text = "$month/$dayOfMonth/$year"
-            Toast.makeText(applicationContext, "$month/$dayOfMonth/$year", Toast.LENGTH_LONG).show()
+            var monthplus = month+1
+            var day_str = dayOfMonth.toString()
+            var month_str = monthplus.toString()
 
-            val intent = Intent(this, com.example.dailyjournal.FavoritesView::class.java);
-            intent.putExtra("date", date.text.toString())
-            startActivity(intent);
+            if (dayOfMonth < 10){
+                day_str = "0" + dayOfMonth
+            }
+            if(month < 10){
+                month_str = "0" + monthplus
+            }
+            var date_formatted = "$year-" + month_str + "-" + day_str
+
+            date.text = date_formatted
+            Toast.makeText(applicationContext, date_formatted, Toast.LENGTH_LONG).show()
+
+            val arrayList = intent.getStringArrayListExtra("arrayList")
+
+            val intent = Intent(this, com.example.dailyjournal.ReadPast::class.java)
+            intent.putExtra("date", date_formatted)
+            intent.putExtra("arrayList", arrayList)
+            startActivity(intent)
+
         })
 
     }
