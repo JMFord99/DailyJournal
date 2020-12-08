@@ -44,8 +44,8 @@ class CalenderView : AppCompatActivity(){
 
             // Searches the arraylist for the user selected date.
             if (arrayList != null) {
-                arrayList.forEach {
-                    if (it.contains(date_formatted.toString())){
+                for (i in 0 until (arrayList.size)) {
+                    if (arrayList.get(i).contains(date_formatted.toString())){
                         // If it finds the date it makes an intent to view the date.
                         date.text = date_formatted
                         Toast.makeText(applicationContext, date_formatted, Toast.LENGTH_LONG).show()
@@ -54,6 +54,7 @@ class CalenderView : AppCompatActivity(){
                         intent.putExtra("arrayList", arrayList)
                         startActivity(intent)
                         found = true;
+                        break;
                     }
 
                 }

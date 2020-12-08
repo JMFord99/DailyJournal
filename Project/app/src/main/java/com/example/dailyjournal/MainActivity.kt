@@ -116,7 +116,7 @@ class MainActivity: AppCompatActivity() {
         "T13:35:52.140~cccccccccc~entry126~0\n2020-12-04T13:35:52.140~ddddddddd~entry124~1\n2020-12-03T13:35:52.140~eeeeeeeee~entry123~1" +
                 "\n2020-11-01T13:35:52.140~fffffffff~entry111~0\n2020-11-30T13:35:52.140~ggggggggg~entry11130~1\n" +
                 "2020-11-25T13:35:52.140~hhhhhhhhh~entry1125~0\n2020-11-20T13:35:52.140~iiiiiiiii~entry112-~1\n" +
-                "2020-11-15T13:35:52.140~jjjjjjjjj~entry1115~1\n"
+                "2020-11-15T13:35:52.140~jjjjjjjjj~entry1115~1"
 
         data.split("\n").forEach {
             arrayList.add(it + sep)

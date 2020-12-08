@@ -16,6 +16,7 @@ import java.time.LocalDateTime
 class FavoritesView : AppCompatActivity() {
 
     private lateinit var favorites: ListView
+    private lateinit var listItems: Array<String?>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,24 +32,39 @@ class FavoritesView : AppCompatActivity() {
 
             // Searches the arraylist for favorite items
             var i = 0
-            for (i in 0 until (arrayList.size - 1)) {
+            for (i in 0 until (arrayList.size)) {
+                var add = true
                 var data = arrayList.get(i).split("~")
                 if (data[3].contains("1")) {
-                    listOne.add(data[1])
+                    listOne.forEach {
+                        if (it == data[1]) {
+                            add = false
+                        }
+                    }
+                    if (add)
+                        listOne.add(data[1])
                 }
             }
 
             // Add favorite items to array
-            val listItems = arrayOfNulls<String>(listOne.size)
+            listItems = arrayOfNulls<String>(listOne.size)
             i = 0;
             for (i in 0 until listOne.size) {
                 listItems[i] = listOne.get(i)
             }
 
             // Display favorite items
+
             val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, listItems)
             favorites.adapter = adapter
         }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        listItems= arrayOfNulls<String>(0)
+        val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, listItems)
+        favorites.adapter = adapter
     }
 }
 /*
